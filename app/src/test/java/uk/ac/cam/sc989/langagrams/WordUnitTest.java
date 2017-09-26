@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 /**Created on 25/09/2017 by Simon Crane
@@ -131,5 +133,15 @@ public class WordUnitTest {
     @Test
     public void wordCantBeMadeWithoutRepeatsOfRepeatingLetters() throws Exception {
         assertEquals(w.canBeMadeFrom("helo"), false);
+    }
+
+    @Test
+    public void anagramsWork() {
+        Word v = new Word("ab");
+        ArrayList a = v.getAnagrams();
+        assertEquals(a.contains("AB"), true);
+        assertEquals(a.contains("BA"), true);
+        assertEquals(a.contains("AA"), false);
+        assertEquals(a.contains("BB"), false);
     }
 }

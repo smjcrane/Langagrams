@@ -2,6 +2,7 @@ package uk.ac.cam.sc989.langagrams;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -13,12 +14,17 @@ class Word{
     private int language;
     private String value;
     private boolean found;
+    private ArrayList<String> letters;
 
     //By default, a word is considered English, because I say so
     public Word(String s){
         language = Dictionary.ENGLISH;
         value = s.toUpperCase();
         found = false;
+        letters = new ArrayList<String>();
+        for (int i = 0; i < s.length(); i++){
+            letters.add(value.substring(i, i+1));
+        }
     }
 
     //You can specify language at creation time
@@ -110,5 +116,31 @@ class Word{
         }
         //if we survived the above loop, we did have enough
         return true;
+    }
+
+    //find all anagrams
+    public ArrayList<String> getAnagrams(){
+        ArrayList<String> anags = new ArrayList<String>();
+        int num = Common.factorial(value.length());
+        for (int i = 0; i < num; i++) {
+            int k = i;
+            String s = "";
+            for (int j = 0; j < value.length(); j++){
+                if (j == value.length() - 1){
+                    s += letters.get(0);
+                    letters.remove(0);
+                } else {
+                    s += letters.get(k % (value.length() - j - 1));
+                    letters.remove(k % (value.length() - j - 1));
+                }
+                k /= (j + 1);
+            }
+            anags.add(s);
+            letters = new ArrayList<String>();
+            for (int l = 0; l < s.length(); l++){
+                letters.add(value.substring(l, l+1));
+            }
+        }
+        return anags;
     }
 }
