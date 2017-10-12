@@ -130,8 +130,8 @@ class Word{
                     s += letters.get(0);
                     letters.remove(0);
                 } else {
-                    s += letters.get(k % (value.length() - j - 1));
-                    letters.remove(k % (value.length() - j - 1));
+                    s += letters.get(k % (value.length() - j ));
+                    letters.remove(k % (value.length() - j ));
                 }
                 k /= (j + 1);
             }
@@ -142,5 +142,21 @@ class Word{
             }
         }
         return anags;
+    }
+
+    public ArrayList<Word> getSubWords(){
+        ArrayList<Word> subWords = new ArrayList<Word>();
+        if (value.length() <= 1){
+            return subWords;
+        }
+        for (int i = 0; i < value.length(); i++) {
+            String subValue = value.substring(0,i).concat(value.substring(i+1,value.length()));
+            Word subWord = new Word(subValue, language);
+            subWords.add(subWord);
+            for (Word w : subWord.getSubWords()) {
+                subWords.add(w);
+            }
+        }
+        return subWords;
     }
 }

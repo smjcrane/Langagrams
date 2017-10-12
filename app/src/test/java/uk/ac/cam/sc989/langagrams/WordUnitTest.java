@@ -137,11 +137,18 @@ public class WordUnitTest {
 
     @Test
     public void anagramsWork() {
-        Word v = new Word("ab");
-        ArrayList a = v.getAnagrams();
-        assertEquals(a.contains("AB"), true);
-        assertEquals(a.contains("BA"), true);
-        assertEquals(a.contains("AA"), false);
-        assertEquals(a.contains("BB"), false);
+        ArrayList a = w.getAnagrams();
+        assertEquals(a.contains("HELLO"), true);
+        assertEquals(a.contains("OHLEL"), true);
+        assertEquals(a.contains("HEELO"), false);
+    }
+
+    @Test
+    public void canFindSubWords() {
+        ArrayList a = w.getSubWords();
+        assertEquals(a.contains(new Word("HELL")), true);
+        assertEquals(a.contains(new Word("HOLE")), true);
+        assertEquals(a.contains(new Word("")), false);
+        assertEquals(a.contains(new Word("HOOLO")), false);
     }
 }
