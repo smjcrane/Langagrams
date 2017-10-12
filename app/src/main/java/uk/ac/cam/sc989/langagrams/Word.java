@@ -144,6 +144,16 @@ class Word{
         return anags;
     }
 
+    public ArrayList<Word> getAnagramsAsWords() {
+        //TODO add relevant dictionary checks
+        ArrayList<String> stringRams = getAnagrams();
+        ArrayList<Word> wordRams = new ArrayList<>();
+        for (String s : stringRams) {
+            wordRams.add(new Word(s, language));
+        }
+        return wordRams;
+    }
+
     public ArrayList<Word> getSubWords(){
         ArrayList<Word> subWords = new ArrayList<Word>();
         if (value.length() <= 1){

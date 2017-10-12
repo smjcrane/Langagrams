@@ -136,7 +136,7 @@ public class WordUnitTest {
     }
 
     @Test
-    public void anagramsWork() {
+    public void anagramsWork() throws Exception {
         ArrayList a = w.getAnagrams();
         assertEquals(a.contains("HELLO"), true);
         assertEquals(a.contains("OHLEL"), true);
@@ -144,7 +144,15 @@ public class WordUnitTest {
     }
 
     @Test
-    public void canFindSubWords() {
+    public void anagramsWorkAsWords() throws Exception{
+        ArrayList a = w.getAnagramsAsWords();
+        assertEquals(a.contains(new Word("HELLO")), true);
+        assertEquals(a.contains(new Word("OHLEL")), true);
+        assertEquals(a.contains(new Word("HEELO")), false);
+    }
+
+    @Test
+    public void canFindSubWords() throws Exception {
         ArrayList a = w.getSubWords();
         assertEquals(a.contains(new Word("HELL")), true);
         assertEquals(a.contains(new Word("HOLE")), true);
